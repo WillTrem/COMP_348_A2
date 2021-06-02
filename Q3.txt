@@ -1,0 +1,5 @@
+(defun depth (x &optional (d 0))
+    (cond ((atom x) d)
+        (t (max(depth (car x) (+ d 1))
+                (depth (cdr x) d)))))
+(print(depth '((2)(3 (6))(4) (((5))))))
