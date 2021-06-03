@@ -1,0 +1,11 @@
+;gnu clisp  2.49.60
+(defun cog (lst) (/ (cogNum lst) (atomNum lst)))
+(defun cogNum (lst &optional (N (length lst)) (pos 1))
+    (if (= pos N) (* (atomNum(car lst)) (- pos (/ (+ N 1) 2)))
+    (+ (* (atomNum(car lst)) (- pos (/ (+ N 1) 2))) (cogNum (cdr lst) N (+ 1 pos)))))
+(defun atomNum (lst) 
+    (cond ((null lst ) 0 )
+        ((atom lst) 1)
+        (t (+ (atomNum(car lst)) (atomNum(cdr lst))))))
+(setq list   '(1 2 3 4 5 6))
+(print (cog list))
