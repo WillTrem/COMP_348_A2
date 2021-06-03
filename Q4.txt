@@ -1,0 +1,11 @@
+;gnu clisp  2.49.60
+(defun lucasNumber (n)
+    (cond ((= n 0) 2) 
+        ((= n 1 ) 1)
+        (t (+ (lucasNumber (- n 1)) (lucasNumber (- n 2))))))
+
+(defun lucasFunction (n)
+    (if (zerop n) (list(lucasNumber 0))
+        (append (lucasFunction (- n 1)) (list(lucasNumber n)))))
+
+(print (lucasFunction 5))
