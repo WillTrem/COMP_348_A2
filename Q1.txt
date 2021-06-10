@@ -1,0 +1,8 @@
+(defun sub-list (lst from &optional (to 'NIL))
+    (cond ((and (equal from 1) (> to 1)) (cons (car lst) (sub-list (cdr lst) from (decf to))))
+        ((and (not(equal from 1)) (> to 1)) (sub-list (cdr lst) (decf from) (decf to)))
+        ((and (equal from 1) (equal to 1)) (cons  (car lst) '()))
+        )
+    )
+
+(print (sub-list '(1 6 12 4 8 9) 4 6))
