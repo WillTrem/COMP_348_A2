@@ -1,0 +1,28 @@
+;gnu clisp  2.49.60
+
+(defun simple-list (lst)
+    (if (atom (car lst))
+        (return-from simple-list lst))
+    (simple-list (car lst))
+    ) ;this outputs a simple list from (((1 2 ))) to (1 2)
+      ; to easily append it to lst in main function
+
+(defun flatten-nodup (lst)
+    (let* ((newlst '())
+          (finallst '()))
+         (loop for x in lst
+               if (atom x)
+               do (setf newlst (append newlst (list x)))
+               else do (setf newlst (append newlst (simple-list x)))
+               );loop if x is an atom append it to newlst, else append
+                ; it to new list but put it through simple-list first
+         ;(return-from flatten-nodup newlst); from this point the list is atomized
+         (loop for y in newlst
+               if (equal (member y finallst) NIL)
+               do (setf finallst (append finallst (list y)))
+               );loop
+         (return-from flatten-nodup finallst)
+         );let
+    );function
+
+(print (flatten-nodup '(1 2 (3 1) (a 2.5) (2 4.5) ((1 2)))))
