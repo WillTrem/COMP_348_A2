@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/will-/Google Drive/Concordia University/Semesters/Summer 2021/COMP-348/Assignment 2/Q10/main.c
+stdio.h
+-
+selectionsort.h
+C:/Users/will-/Google Drive/Concordia University/Semesters/Summer 2021/COMP-348/Assignment 2/Q10/selectionsort.h
+selectionsort.h
+C:/Users/will-/Google Drive/Concordia University/Semesters/Summer 2021/COMP-348/Assignment 2/Q10/selectionsort.h
+
+C:/Users/will-/Google Drive/Concordia University/Semesters/Summer 2021/COMP-348/Assignment 2/Q10/selectionsort.h
+
