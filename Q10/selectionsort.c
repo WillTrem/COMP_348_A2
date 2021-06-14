@@ -20,3 +20,16 @@ void selectionsort(int* arr, int size){
 
 }
 
+void selectionsort2(int* arr, int size, int* (*fun_ptr)(int*,int)){
+
+    if((*fun_ptr) == NULL){
+        int* (*fun_ptr)(int*,int) = findmin;
+    }
+    
+    for(int i = 0; i<size; i++){
+        int *min =  fun_ptr((arr+i), size-i);
+        int temp = arr[i];
+        arr[i] = *min;
+        *min = temp;
+    }
+}
