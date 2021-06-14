@@ -27,19 +27,23 @@ int main() {
     toSort[2] = 5;
     toSort[3] = 6;
     toSort[4] = -1;
+    
+    !**** CHANGE array TO toSort ****!
+
     */
+
     printf("Pre-sorted array: ");
     printArr(array, 5);
     printf("\n");
     
     printf("Ascending order: ");
-    selectionsort2(array, 5, fun_ptr);
+    selectionsort(array, 5, fun_ptr);
     printArr(array, 5);
     min = array[0];
     
     printf("Descending order: ");
     fun_ptr = findmax;
-    selectionsort2(array,5, fun_ptr);
+    selectionsort(array,5, fun_ptr);
     printArr(array, 5);
     max = array[0];
     
@@ -59,13 +63,20 @@ int main() {
     }
     sd = sqrt(sd/4);
     
-    printf("Standard Deviation: %.6f\n", sd);
+    printf("Standard Deviation: %.12f\n", sd);
     //free(toSort);
     return 0;
 }
 
 static int* findmax(int* arr, int size){
-    return arr;
+    int *maxptr = arr;
+    for(int i = 0; i<size; i++){
+        if (*maxptr < arr[i]){
+            maxptr = &arr[i];
+        }
+    }
+    
+    return maxptr;
 }
 
 static void printArr(int *arr, int size){
