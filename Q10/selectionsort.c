@@ -7,6 +7,7 @@ static int* findmin(int *arr, int size){
             minptr = &arr[i];
         }
     }
+    
     return minptr;
 }
 
@@ -22,8 +23,8 @@ void selectionsort(int* arr, int size){
 
 void selectionsort2(int* arr, int size, int* (*fun_ptr)(int*,int)){
 
-    if((*fun_ptr) == NULL){
-        int* (*fun_ptr)(int*,int) = findmin;
+    if(fun_ptr == NULL){
+        fun_ptr = findmin;
     }
     
     for(int i = 0; i<size; i++){

@@ -12,7 +12,6 @@ int main() {
     printArr(array, 5);
     selectionsort(array,5);
     printArr(array, 5);
-    
     printf("selectionsort2: \n");
     printArr(array2, 5);
     selectionsort2(array2,5,(*fun_ptr));
