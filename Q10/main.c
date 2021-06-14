@@ -21,7 +21,12 @@ int main() {
 }
 static void printArr(int *arr, int size){
     for (int i = 0; i < size; ++i) {
-        printf("%d, ", arr[i]);
+        if(i < size-1){
+            printf("%d, ", arr[i]);
+        }
+        else{
+            printf("%d ", arr[i]);
+        }
     }
     printf("\n");
 }
