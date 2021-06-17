@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <stdlib.h>
 typedef enum { ATOM, LIST } eltype;
 typedef char atom;
 struct _listnode;
@@ -7,8 +7,8 @@ struct _listnode;
 typedef struct {
     eltype type;
     union {
-    atom a;
-    struct _listnode* l;
+        atom a;
+        struct _listnode* l;
     };
 } element;
 
@@ -54,13 +54,15 @@ element lasel(list l){
     element e;
     e.type = LIST;
     //... to be completed
+    e.l = l;
     return e;
 }
 
 list cons(element e, list l){
+
     /*
     Something like...
-    
+
     element tail = lasel(l);
     e.l = tail;
     list newList;
@@ -68,7 +70,12 @@ list cons(element e, list l){
     newList.next = tail;
     return newList;
     */
-    return l;
+
+    list head = NULL;
+    struct _listnode * newNode = malloc(sizeof(struct _listnode));
+    newNode->el = e;
+    newNode->next = l;
+    return head;
 }
 
 list append(list l1, list l2){
@@ -79,7 +86,13 @@ list append(list l1, list l2){
     newList.next = l2;
     return newList;
     */
-    return l1;
+    list head = l1;
+    struct _listnode * iterator = head;
+    while(iterator->next != NULL){
+        iterator = iterator->next;
+    }
+    iterator->next = l2;
+    return head;
 }
 
 element car(element e){
@@ -87,8 +100,8 @@ element car(element e){
         return NIL;
     }
     else{
-        //... to be completed
-        return NIL;
+        return e;
+        
     }
 }
 
