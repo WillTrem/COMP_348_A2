@@ -1,0 +1,29 @@
+;gnu clisp  2.49.60
+
+(defun is-bst (lst)
+    (if (null (bst-checker lst))
+        T
+        NIL
+    )
+)
+
+(defun bst-checker (lst)
+    (if (not (null (car (car (cdr lst)))))
+        (cond
+            ((null lst) T) ; check if empty
+            ((<= (car lst) (car (car (cdr lst)))) T) ; check if left >= top 
+            ((bst-checker (car (cdr lst))) T) ; recursive call
+        )
+        NIL
+    )
+    (if (not (null (car (car (cdr (cdr lst))))))
+        (cond
+            ((null lst) T) ; check if empty
+            ((> (car lst) (car (car (cdr (cdr lst))))) T) ; check if right < top
+            ((bst-checker (car (cdr (cdr lst)))) T) ; recursive call
+        )
+        NIL
+    )
+)
+
+(print (is-bst '(8 (3 (1 () ()) (6 (4 () ())(7 () ()))) (10 () (14 (13 () ()) ())))))
