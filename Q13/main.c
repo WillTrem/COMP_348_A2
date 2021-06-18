@@ -26,42 +26,43 @@ list append(list, list);
 element car(element);
 list cdr(element);
 list cddr(element);
-void free(list);
+//void free(list);
 void print(element);
+void print2(list);
 
 int main()
 {
-    printf("Hello World");
+    element a = aasel('a');
+    element b = aasel('b');
+    element c = aasel('c');
+    element listEl = lasel(cons(b, cons(c,NULL)));
+    element d = aasel('d');
+    element e = aasel('e');
+    list list1 = cons(a, cons(listEl, cons(d, cons(e,NULL))));
+    print(lasel(list1));
+    printf("\n");
+    print(car(lasel(list1)));
+    printf("\n");
+    print(lasel(cdr(lasel(list1))));
+    printf("\n");
+    print(car(car(lasel(list1))));
 
     return 0;
 }
 
 element aasel(atom a){
-    _listnode head = NULL;
-    
-    element * e = (element *)malloc(sizeof(element));
-    e->type = ATOM;
-    e->a = a;
-    e->l = head;
+    element e;
+    e.type = ATOM;
+    e.a = a;
     return e;
 }
 
 element lasel(list l){
-    list head = NULL;
-    
-    element * e = (element *)malloc(sizeof(element));
-    e->type = LIST;
-    e->a = l;
-    e->l = head;
+    element e;
+    e.type = LIST;
+    //... to be completed
+    e.l = l;
     return e;
-}
-
-list cons(element e, list l){
-    list head = NULL;
-    struct _listnode * newNode = malloc(sizeof(struct _listnode));
-    newNode->el = e;
-    newNode->next = l;
-    return head;
 }
 
 list append(list l1, list l2){
@@ -74,59 +75,71 @@ list append(list l1, list l2){
     return head;
 }
 
+list cons(element e, list l){
+    list head = NULL;
+    struct _listnode * newNode = malloc(sizeof(struct _listnode));
+    newNode->el = e;
+    newNode->next = NULL;
+    head = newNode;
+
+    return append(head,l);
+}
+
 element car(element e){
     if(e.type == ATOM){
         return NIL;
     }
     else{
-        return e[0];
+        return e.l->el;
     }
 }
 
 list cdr(element e){
-    if(e.type == ATOM){
-        return NULL;
-    }
-    else{
-        struct _listnode * iterator = e[1];
-        list l = NULL:
-        while(iterator->next != NULL){
-            append(l,iterator);
-        }
-        return l;
-    }
+    list l = e.l->next;
+    return l;
 }
 
 list cddr(element e){
-     if(e.type == ATOM){
-        return NULL;
-    }
-    else{
-        struct _listnode * iterator = e[2];
-        list l = NULL:
-        while(iterator->next != NULL){
-            append(l,iterator);
-        }
-        return l;
-    }
-}
-
-
-void lfree(list l){
-    struct _listnode * iterator = l[0];
-    while(iterator->next != NULL){
-        free(iterator);
-    }
+    list l = e.l->el.l;
+    return l;
 }
 
 void print(element e){
     if(e.type == ATOM){
         printf(" %c ", e.a);
     }
-    else if (e.type == LIST){
-        printf("((%c))", e.a);
+    else if(e.type == LIST){
+        if (e.l == NULL){
+            printf("NIL");
+        }
+        else{
+            printf("(");
+            print(e.l->el);
+            print(lasel(e.l->next));
+            printf(")");
+        }
+
     }
-    else{
-        printf("NIL");
+}
+
+void print2(list l){
+    element e = l->el;
+    if(e.type == ATOM){
+        printf(" %c ", e.a);
+        if(l->next != NULL){
+            print2(l->next);
+        }
+    }
+    else if(e.type == LIST){
+        if (e.l == NULL){
+            printf("NIL");
+        }
+        else{
+            printf("(");
+            print2(e.l);
+            print2(l->next);
+            printf(")");
+        }
+
     }
 }
