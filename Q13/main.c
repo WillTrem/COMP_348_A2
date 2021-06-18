@@ -37,40 +37,26 @@ int main()
 }
 
 element aasel(atom a){
-    /*element * e = (element *)malloc(sizeof(element));
+    _listnode head = NULL;
+    
+    element * e = (element *)malloc(sizeof(element));
     e->type = ATOM;
     e->a = a;
-    e->l = NIL;
-    */
-    element e;
-    e.type = ATOM;
-    e.a = a;
-    // initialization of *list here...
-    //e.l = l;
+    e->l = head;
     return e;
 }
 
 element lasel(list l){
-    element e;
-    e.type = LIST;
-    //... to be completed
-    e.l = l;
+    list head = NULL;
+    
+    element * e = (element *)malloc(sizeof(element));
+    e->type = LIST;
+    e->a = l;
+    e->l = head;
     return e;
 }
 
 list cons(element e, list l){
-
-    /*
-    Something like...
-
-    element tail = lasel(l);
-    e.l = tail;
-    list newList;
-    newList.el = e;
-    newList.next = tail;
-    return newList;
-    */
-
     list head = NULL;
     struct _listnode * newNode = malloc(sizeof(struct _listnode));
     newNode->el = e;
@@ -79,13 +65,6 @@ list cons(element e, list l){
 }
 
 list append(list l1, list l2){
-    /*
-    Something like...
-    list newList;
-    newList.el = lasel(l1);
-    newList.next = l2;
-    return newList;
-    */
     list head = l1;
     struct _listnode * iterator = head;
     while(iterator->next != NULL){
@@ -100,27 +79,54 @@ element car(element e){
         return NIL;
     }
     else{
-        return e;
-        
+        return e[0];
     }
 }
 
 list cdr(element e){
-    //... to be completed
-    list l; // to be removed; here just for return-statement
-    return l;
+    if(e.type == ATOM){
+        return NULL;
+    }
+    else{
+        struct _listnode * iterator = e[1];
+        list l = NULL:
+        while(iterator->next != NULL){
+            append(l,iterator);
+        }
+        return l;
+    }
 }
 
 list cddr(element e){
-    //... to be completed
-    list l; // to be removed; here just for return-statement
-    return l;
+     if(e.type == ATOM){
+        return NULL;
+    }
+    else{
+        struct _listnode * iterator = e[2];
+        list l = NULL:
+        while(iterator->next != NULL){
+            append(l,iterator);
+        }
+        return l;
+    }
 }
 
-void free(list l){
-    //... to be completed
+
+void lfree(list l){
+    struct _listnode * iterator = l[0];
+    while(iterator->next != NULL){
+        free(iterator);
+    }
 }
 
 void print(element e){
-    //... to be completed
+    if(e.type == ATOM){
+        printf(" %c ", e.a);
+    }
+    else if (e.type == LIST){
+        printf("((%c))", e.a);
+    }
+    else{
+        printf("NIL");
+    }
 }
